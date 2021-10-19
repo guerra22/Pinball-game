@@ -45,9 +45,9 @@ bool ModulePhysics::Start()
 	b2Vec2* p = new b2Vec2[4];
 	int points[8] = {
 			0,0,
-			447,0,
-			447,900,
-			0,900
+			SCREEN_WIDTH,0,
+			SCREEN_WIDTH,SCREEN_HEIGHT,
+			0,SCREEN_HEIGHT
 	};
 	for (uint i = 0; i < 4; ++i)
 	{
