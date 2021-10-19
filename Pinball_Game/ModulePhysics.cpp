@@ -35,23 +35,34 @@ bool ModulePhysics::Start()
 	b2BodyDef bd;
 	ground = world->CreateBody(&bd);
 
-	// big static circle as "ground" in the middle of the screen
-	int x = SCREEN_WIDTH / 2;
-	int y = SCREEN_HEIGHT / 1.5f;
-	int diameter = SCREEN_WIDTH / 2;
-
 	b2BodyDef body;
 	body.type = b2_staticBody;
-	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
+	body.position.Set(PIXEL_TO_METERS(0), PIXEL_TO_METERS(0));
 
-	b2Body* big_ball = world->CreateBody(&body);
+	b2Body* b = world->CreateBody(&body);
 
-	b2CircleShape shape;
-	shape.m_radius = PIXEL_TO_METERS(diameter) * 0.5f;
+	b2ChainShape shape;
+	b2Vec2* p = new b2Vec2[4];
+	int points[8] = {
+			0,0,
+			447,0,
+			447,900,
+			0,900
+	};
+	for (uint i = 0; i < 4; ++i)
+	{
+		p[i].x = PIXEL_TO_METERS(points[i * 2 + 0]);
+		p[i].y = PIXEL_TO_METERS(points[i * 2 + 1]);
+	}
+
+	shape.CreateLoop(p, 4);
 
 	b2FixtureDef fixture;
 	fixture.shape = &shape;
-	big_ball->CreateFixture(&fixture);
+
+	b->CreateFixture(&fixture);
+
+	delete p;
 
 	return true;
 }

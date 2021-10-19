@@ -22,12 +22,12 @@ public:
 	p2List<PhysBody*> boxes;
 	p2List<PhysBody*> ricks;
 
-	PhysBody* sensor;
 	bool sensed;
 
 	SDL_Texture* circle;
 	SDL_Texture* box;
 	SDL_Texture* rick;
+	SDL_Texture* backgroud;
 	uint bonus_fx;
 	p2Point<int> ray;
 	bool ray_on;
