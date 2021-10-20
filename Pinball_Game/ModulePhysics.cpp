@@ -60,10 +60,6 @@ bool ModulePhysics::Start()
 
 	delete p;
 
-
-
-
-
 	return true;
 }
 
@@ -162,7 +158,7 @@ PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int heig
 	return pbody;
 }
 
-PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size)
+void ModulePhysics::CreateChain(int x, int y, int* points, int size)
 {
 	b2BodyDef body;
 	body.type = b2_staticBody;
@@ -187,13 +183,6 @@ PhysBody* ModulePhysics::CreateChain(int x, int y, int* points, int size)
 	b->CreateFixture(&fixture);
 
 	delete p;
-
-	PhysBody* pbody = new PhysBody();
-	pbody->body = b;
-	b->SetUserData(pbody);
-	pbody->width = pbody->height = 0;
-
-	return pbody;
 }
 
 // 

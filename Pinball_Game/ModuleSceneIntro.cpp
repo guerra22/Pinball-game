@@ -70,8 +70,7 @@ bool ModuleSceneIntro::Start()
 		241, 48,
 		219, 44
 	};
-
-	App->physics->CreateChain(0, 0, pinballtemplate, 78);
+    App->physics->CreateChain(0, 0, pinballtemplate, 78);
 
 	int pinballtemplate2[14] = {
 		255, 722,
@@ -82,7 +81,6 @@ bool ModuleSceneIntro::Start()
 		339, 649,
 		257, 718
 	};
-
 	App->physics->CreateChain(0, 0, pinballtemplate2, 14);
 
 	int pinballtemplate3[14] = {
@@ -94,10 +92,8 @@ bool ModuleSceneIntro::Start()
 		313, 607,
 		275, 640
 	};
-
 	App->physics->CreateChain(0, 0, pinballtemplate3, 14);
 	
-
 	int pinballtemplate4[10] = {
 	246, 581,
 	255, 586,
@@ -138,6 +134,38 @@ bool ModuleSceneIntro::Start()
 	343, 374
 	};
 	App->physics->CreateChain(0, 0, pinballtemplate5, 56);
+
+	int pinballtemplate6[14] = {
+	59, 661,
+	58, 511,
+	66, 511,
+	65, 653,
+	151, 730,
+	144, 736,
+	59, 662
+	};
+	App->physics->CreateChain(0, 0, pinballtemplate6, 14);
+
+	/*int pinballtemplate7[14] = {
+	85, 620,
+	86, 543,
+	94, 545,
+	91, 615,
+	135, 651,
+	129, 656,
+	85, 620
+	};
+	App->physics->CreateChain(0, 0, pinballtemplate7, 14);
+
+	int pinballtemplate8[10] = {
+	120, 519,
+	116, 561,
+	147, 586,
+	153, 581,
+	120, 519
+	};
+	App->physics->CreateChain(0, 0, pinballtemplate8, 10);*/
+
 	return ret;
 }
 
@@ -161,7 +189,7 @@ update_status ModuleSceneIntro::Update()
 
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
-		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 10));
+		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 11));
 		circles.getLast()->data->listener = this;
 	}
 
