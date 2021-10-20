@@ -29,6 +29,50 @@ bool ModuleSceneIntro::Start()
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 	backgroud = App->textures->Load("pinball/pinballtemplate.png");
 
+	int pinballtemplate[78] = {
+		219, 43,
+		186, 48,
+		154, 58,
+		120, 81,
+		101, 101,
+		81, 128,
+		89, 149,
+		119, 150,
+		136, 139,
+		137, 168,
+		109, 176,
+		93, 200,
+		87, 237,
+		92, 276,
+		96, 332,
+		99, 365,
+		96, 376,
+		86, 379,
+		65, 293,
+		38, 294,
+		63, 395,
+		30, 459,
+		28, 670,
+		40, 689,
+		181, 808,
+		223, 810,
+		366, 686,
+		365, 446,
+		380, 445,
+		378, 760,
+		408, 759,
+		407, 250,
+		387, 186,
+		371, 147,
+		342, 106,
+		304, 75,
+		274, 58,
+		241, 48,
+		219, 44
+	};
+
+	App->physics->CreateChain(0, 0, pinballtemplate, 78);
+
 	return ret;
 }
 
@@ -52,10 +96,11 @@ update_status ModuleSceneIntro::Update()
 
 	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 	{
-		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 25));
+		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 10));
 		circles.getLast()->data->listener = this;
 	}
 
+	
 	// Prepare for raycast ------------------------------------------------------
 	
 	iPoint mouse;
