@@ -82,7 +82,7 @@ bool ModuleSceneIntro::Start()
 		257, 718
 	};
 	App->physics->CreateChain(0, 0, pinballtemplate2, 14);
-
+	
 	int pinballtemplate3[14] = {
 		272, 642,
 		273, 646,
@@ -102,7 +102,7 @@ bool ModuleSceneIntro::Start()
 	248, 577
 	};
 	App->physics->CreateChain(0, 0, pinballtemplate4, 10);
-
+	
 	int pinballtemplate5[56] = {
 	342, 379,
 	342, 384,
@@ -134,7 +134,7 @@ bool ModuleSceneIntro::Start()
 	343, 374
 	};
 	App->physics->CreateChain(0, 0, pinballtemplate5, 56);
-
+	
 	int pinballtemplate6[14] = {
 	59, 661,
 	58, 511,
@@ -145,26 +145,27 @@ bool ModuleSceneIntro::Start()
 	59, 662
 	};
 	App->physics->CreateChain(0, 0, pinballtemplate6, 14);
-
-	/*int pinballtemplate7[14] = {
-	85, 620,
-	86, 543,
-	94, 545,
-	91, 615,
-	135, 651,
-	129, 656,
-	85, 620
+	
+	int pinballtemplate7[14] = {
+	129, 655,
+	133, 649,
+	93, 614,
+	93, 548,
+	89, 544,
+	89, 615,
+	126, 653
 	};
 	App->physics->CreateChain(0, 0, pinballtemplate7, 14);
 
 	int pinballtemplate8[10] = {
-	120, 519,
-	116, 561,
+	120, 518,
+	154, 582,
 	147, 586,
-	153, 581,
-	120, 519
+	118, 562,
+	119, 521
 	};
-	App->physics->CreateChain(0, 0, pinballtemplate8, 10);*/
+
+	App->physics->CreateChain(0, 0, pinballtemplate8, 10);
 
 	return ret;
 }
