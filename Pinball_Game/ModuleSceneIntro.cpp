@@ -46,14 +46,14 @@ bool ModuleSceneIntro::Start()
 	walls.add(pb_wall7);
 	walls.add(pb_wall8);
 
-	pb_leftFlipper = App->physics->CreateKinematicChain(0, 0, leftFlipper, 24);
-	pb_rightFlipper = App->physics->CreateKinematicChain(255, 731, rightFlipper, 20);
+	pb_leftFlipper = App->physics->CreateKinematicChain(153, 733, leftFlipper, 20);
+	pb_rightFlipper = App->physics->CreateKinematicChain(255, 733, rightFlipper, 20);
 
 
 	angleMargin = 10.0f;
-	angularSpeed = 15.0f;
+	angularSpeed = 20.0f;
 	minAngle = 0.0f;
-	maxAngle = 60.0f;
+	maxAngle = 70.0f;
 
 	return ret;
 }
