@@ -20,12 +20,17 @@ public:
 public:
 	p2List<PhysBody*> circles;
 	p2List<PhysBody*> walls;
-	p2List<PhysBody*> leftFlipper_b;
+	p2List<PhysBody*> leftflipper_b;
+	p2List<PhysBody*> rightflipper_b;
+	
 
 	bool sensed;
 
 	SDL_Texture* circle;
 	SDL_Texture* backgroud;
+	SDL_Texture* leftflipper;
+	SDL_Texture* rightflipper;
+
 
 	PhysBody* pb_leftFlipper;
 	PhysBody* pb_rightFlipper;
@@ -81,13 +86,13 @@ public:
 		219, 44
 	};
 	int wall2[14] = {
-		255, 722,
-		259, 726,
-		342, 650,
-		343, 504,
-		340, 505,
-		339, 649,
-		257, 718
+		255, 727,
+		259, 731,
+		342, 655,
+		343, 509,
+		340, 510,
+		339, 654,
+		257, 723
 	};
 	int wall3[14] = {
 		272, 642,

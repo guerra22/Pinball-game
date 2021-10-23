@@ -27,6 +27,8 @@ bool ModuleSceneIntro::Start()
 	circle = App->textures->Load("pinball/ball.png"); 
 	bonus_fx = App->audio->LoadFx("pinball/bonus.wav");
 	backgroud = App->textures->Load("pinball/pinballtemplate.png");
+	leftflipper = App->textures->Load("pinball/leftflipper.png");
+	rightflipper = App->textures->Load("pinball/rightflipper.png");
 
 	PhysBody* pb_wall1 = App->physics->CreateStaticChain(0, 0, wall1, 78);
 	PhysBody* pb_wall2 = App->physics->CreateStaticChain(0, 0, wall2, 14);
@@ -47,7 +49,9 @@ bool ModuleSceneIntro::Start()
 	walls.add(pb_wall8);
 
 	pb_leftFlipper = App->physics->CreateKinematicChain(153, 733, leftFlipper, 20);
+	leftflipper_b.add(pb_leftFlipper);
 	pb_rightFlipper = App->physics->CreateKinematicChain(255, 733, rightFlipper, 20);
+	rightflipper_b.add(pb_rightFlipper);
 
 
 	angleMargin = 10.0f;
@@ -102,7 +106,6 @@ update_status ModuleSceneIntro::Update()
 			{
 				pb_leftFlipper->body->SetAngularVelocity(angularSpeed);
 			}
-
 		}
 
 		if (pb_leftFlipper->body->GetAngle() + DEGTORAD * angularSpeed > DEGTORAD * minAngle + DEGTORAD * angleMargin)
@@ -149,6 +152,7 @@ update_status ModuleSceneIntro::Update()
 	fVector normal(0.0f, 0.0f);
 
 	App->renderer->Blit(backgroud, 0, 0, NULL, 1.0f, 0);
+	//App->renderer->Blit(leftflipper, 146, 727, NULL, 1.0f, 0);
 	// All draw functions ------------------------------------------------------
 	p2List_item<PhysBody*>* c = circles.getFirst();
 
@@ -159,7 +163,10 @@ update_status ModuleSceneIntro::Update()
 		App->renderer->Blit(circle, x, y, NULL, 1.0f, c->data->GetRotation());
 		c = c->next;
 	}
-
+	
+	App->renderer->Blit(leftflipper, 146, 727, NULL, 1.0f, leftflipper_b.getFirst()->data->GetRotation(), 7, 6);
+	App->renderer->Blit(rightflipper, 215, 727, NULL, 1.0f, rightflipper_b.getFirst()->data->GetRotation(), 40, 6);
+		
 	// ray -----------------
 	if(ray_on == true)
 	{
