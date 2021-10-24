@@ -59,6 +59,60 @@ bool ModulePhysics::Start()
 
 	delete p;
 
+	b2BodyDef body6;
+	body6.type = b2_dynamicBody;
+	body6.position.Set(PIXEL_TO_METERS(395), PIXEL_TO_METERS(780));
+
+	b2Body* b6 = world->CreateBody(&body6);
+	b2PolygonShape box6;
+	box6.SetAsBox(PIXEL_TO_METERS(10) * 0.5f, PIXEL_TO_METERS(10) * 0.5f);
+
+	b2FixtureDef fixture6;
+	fixture6.shape = &box6;
+	fixture6.density = 1.0f;
+
+	b6->CreateFixture(&fixture6);
+
+	PhysBody* pbody6 = new PhysBody();
+	pbody6->body = b6;
+	b6->SetUserData(pbody6);
+	pbody6->width = 300;
+	pbody6->height = 780;
+	//------------------------------------------------
+	b2BodyDef body7;
+	body7.type = b2_staticBody;
+	body7.position.Set(PIXEL_TO_METERS(395), PIXEL_TO_METERS(800));
+
+	b2Body* b7 = world->CreateBody(&body7);
+	b2PolygonShape box7;
+	box7.SetAsBox(PIXEL_TO_METERS(10) * 0.5f, PIXEL_TO_METERS(10) * 0.5f);
+
+	b2FixtureDef fixture7;
+	fixture7.shape = &box7;
+	fixture7.density = 1.0f;
+
+	b7->CreateFixture(&fixture7);
+
+	PhysBody* pbody7 = new PhysBody();
+	pbody7->body = b7;
+	b7->SetUserData(pbody7);
+	pbody7->width = 395;
+	pbody7->height = 800;
+
+//----------------------
+
+	b2PrismaticJointDef jointDef1;
+	b2Vec2 worldAxis(0.0f, -1.0f);
+	jointDef1.Initialize(b7, b6, b7->GetWorldCenter(), worldAxis);
+	jointDef1.lowerTranslation = -1.0f;
+	jointDef1.upperTranslation = 1.0f;
+	jointDef1.enableLimit = true;
+	jointDef1.maxMotorForce = 10.0f;
+	jointDef1.motorSpeed = 0.0f;
+	jointDef1.enableMotor = true;
+
+	b2PrismaticJoint* joint = (b2PrismaticJoint*)App->physics->world->CreateJoint(&jointDef1);
+
 	return true;
 }
 
