@@ -30,7 +30,7 @@ bool ModuleSceneIntro::Start()
 	leftflipper = App->textures->Load("pinball/leftflipper.png");
 	rightflipper = App->textures->Load("pinball/rightflipper.png");
 
-	PhysBody* pb_wall1 = App->physics->CreateStaticChain(0, 0, wall1, 84);
+	PhysBody* pb_wall1 = App->physics->CreateStaticChain(0, 0, wall1, 86);
 	PhysBody* pb_wall2 = App->physics->CreateStaticChain(0, 0, wall2, 14);
 	PhysBody* pb_wall3 = App->physics->CreateStaticChain(0, 0, wall3, 14);
 	PhysBody* pb_wall4 = App->physics->CreateStaticChain(0, 0, wall4, 10);
