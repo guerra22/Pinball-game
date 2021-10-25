@@ -57,4 +57,12 @@ private:
 
 	bool debug;
 	b2World* world;
+
+	// Main ground
+	//b2Body* ground;
+	b2Body* b7;
+
+	// Mouse joint
+	b2MouseJoint* mouse_joint;
+	b2Body* mouse_body;
 };

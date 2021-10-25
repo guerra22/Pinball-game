@@ -83,7 +83,7 @@ bool ModulePhysics::Start()
 	body7.type = b2_staticBody;
 	body7.position.Set(PIXEL_TO_METERS(395), PIXEL_TO_METERS(800));
 
-	b2Body* b7 = world->CreateBody(&body7);
+	b7 = world->CreateBody(&body7);
 	b2PolygonShape box7;
 	box7.SetAsBox(PIXEL_TO_METERS(10) * 0.5f, PIXEL_TO_METERS(10) * 0.5f);
 
@@ -175,13 +175,13 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height)
 
 	b->CreateFixture(&fixture);
 
-	PhysBody* pbody = new PhysBody();
-	pbody->body = b;
-	b->SetUserData(pbody);
-	pbody->width = width * 0.5f;
-	pbody->height = height * 0.5f;
+	PhysBody* pbodyr = new PhysBody();
+	pbodyr->body = b;
+	b->SetUserData(pbodyr);
+	pbodyr->width = width * 0.5f;
+	pbodyr->height = height * 0.5f;
 
-	return pbody;
+	return pbodyr;
 }
 
 PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int height)
@@ -406,7 +406,45 @@ update_status ModulePhysics::PostUpdate()
 
 			// TODO 1: If mouse button 1 is pressed ...
 			// App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN
-			// test if the current body contains mouse position
+			if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_DOWN)
+			{
+				// test if the current body contains mouse position
+				b2Vec2 p = { PIXEL_TO_METERS(App->input->GetMouseX()), PIXEL_TO_METERS(App->input->GetMouseY()) };
+				if (f->GetShape()->TestPoint(b->GetTransform(), p) == true)
+				{
+
+					// If a body was selected we will attach a mouse joint to it
+					// so we can pull it around
+
+					// TODO 2: If a body was selected, create a mouse joint
+					// using mouse_joint class property
+
+					// NOTE: you do TODO2 here or also in the original handout's location. 
+					// It doesn't matter unless you are triggering several objects at once;
+					// I leave it to you to add safety checks to avoid re-defining several mouse joints.
+
+					// The variable "b2Body* mouse_body;" is defined in the header ModulePhysics.h 
+					// We need to keep this body throughout several game frames; you cannot define it as a local variable here. 
+					mouse_body = b;
+
+					// Get current mouse position
+					b2Vec2 mousePosition;
+					mousePosition.x = p.x;
+					mousePosition.y = p.y;
+
+					// Define new mouse joint
+					b2MouseJointDef def;
+					def.bodyA = b7; // First body must be a static ground
+					def.bodyB = mouse_body; // Second body will be the body to attach to the mouse
+					def.target = mousePosition; // The second body will be pulled towards this location
+					def.dampingRatio = 0.5f; // Play with this value
+					def.frequencyHz = 2.0f; // Play with this value
+					def.maxForce = 200.0f * mouse_body->GetMass(); // Play with this value
+
+					// Add the new mouse joint into the World
+					mouse_joint = (b2MouseJoint*)App->physics->world->CreateJoint(&def);
+				}
+			}
 		}
 	}
 
@@ -418,9 +456,34 @@ update_status ModulePhysics::PostUpdate()
 
 	// TODO 3: If the player keeps pressing the mouse button, update
 	// target position and draw a red line between both anchor points
+	if (mouse_body != nullptr && mouse_joint != nullptr)
+	{
+		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_REPEAT)
+		{
+			// Get new mouse position and re-target mouse_joint there
+			b2Vec2 mousePosition;
+			mousePosition.x = PIXEL_TO_METERS(App->input->GetMouseX());
+			mousePosition.y = PIXEL_TO_METERS(App->input->GetMouseY());
+			mouse_joint->SetTarget(mousePosition);
+
+			// Draw a red line between both anchor points
+			App->renderer->DrawLine(METERS_TO_PIXELS(mouse_body->GetPosition().x), METERS_TO_PIXELS(mouse_body->GetPosition().y), App->input->GetMouseX(), App->input->GetMouseY(), 255, 0, 0);
+		}
+	}
 
 	// TODO 4: If the player releases the mouse button, destroy the joint
+	if (mouse_body != nullptr && mouse_joint != nullptr)
+	{
+		if (App->input->GetMouseButton(SDL_BUTTON_LEFT) == KEY_UP)
+		{
+			// Tell Box2D to destroy the mouse_joint
+			world->DestroyJoint(mouse_joint);
 
+			// DO NOT FORGET THIS! We need it for the "if (mouse_body != nullptr && mouse_joint != nullptr)"
+			mouse_joint = nullptr;
+			mouse_body = nullptr;
+		}
+	}
 	return UPDATE_CONTINUE;
 }
 
