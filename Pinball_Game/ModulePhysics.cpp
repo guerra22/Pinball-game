@@ -61,11 +61,11 @@ bool ModulePhysics::Start()
 
 	b2BodyDef body6;
 	body6.type = b2_dynamicBody;
-	body6.position.Set(PIXEL_TO_METERS(395), PIXEL_TO_METERS(780));
+	body6.position.Set(PIXEL_TO_METERS(392), PIXEL_TO_METERS(765));
 
 	b2Body* b6 = world->CreateBody(&body6);
 	b2PolygonShape box6;
-	box6.SetAsBox(PIXEL_TO_METERS(10) * 0.5f, PIXEL_TO_METERS(10) * 0.5f);
+	box6.SetAsBox(PIXEL_TO_METERS(24) * 0.5f, PIXEL_TO_METERS(10) * 0.5f);
 
 	b2FixtureDef fixture6;
 	fixture6.shape = &box6;
