@@ -110,9 +110,7 @@ bool ModulePhysics::Start()
 	jointDef1.maxMotorForce = 10.0f;
 	jointDef1.motorSpeed = 0.0f;
 	jointDef1.enableMotor = true;
-
 	b2PrismaticJoint* joint = (b2PrismaticJoint*)App->physics->world->CreateJoint(&jointDef1);
-
 	return true;
 }
 

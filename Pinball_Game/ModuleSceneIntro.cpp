@@ -2,6 +2,7 @@
 #include "Application.h"
 #include "ModuleRender.h"
 #include "ModuleSceneIntro.h"
+#include "ModulePlayer.h"
 #include "ModuleInput.h"
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
@@ -29,6 +30,7 @@ bool ModuleSceneIntro::Start()
 	backgroud = App->textures->Load("pinball/pinballtemplate.png");
 	leftflipper = App->textures->Load("pinball/leftflipper.png");
 	rightflipper = App->textures->Load("pinball/rightflipper.png");
+	pause = App->textures->Load("pinball/ctl_logo.png");
 
 	PhysBody* pb_wall1 = App->physics->CreateStaticChain(0, 0, wall1, 84);
 	PhysBody* pb_wall2 = App->physics->CreateStaticChain(0, 0, wall2, 14);
@@ -52,7 +54,7 @@ bool ModuleSceneIntro::Start()
 	leftflipper_b.add(pb_leftFlipper);
 	pb_rightFlipper = App->physics->CreateKinematicChain(255, 733, rightFlipper, 20);
 	rightflipper_b.add(pb_rightFlipper);
-
+	circles.add(App->physics->CreateCircle(392, 732, 10));
 
 	angleMargin = 10.0f;
 	angularSpeed = 20.0f;
@@ -73,75 +75,91 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
-	if(App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+	App->renderer->Blit(backgroud, 0, 0, NULL, 1.0f, 0);
+	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_UP)
+		gamePaused = !gamePaused;
+	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 	{
-		ray_on = !ray_on;
-		ray.x = App->input->GetMouseX();
-		ray.y = App->input->GetMouseY();
+		App->player->RestartPlayer();
+		App->physics->world->DestroyBody(circles.getFirst()->data->body);
+		circles.clear();
+		circles.add(App->physics->CreateCircle(392, 732, 10));
 	}
-
-	if(App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
+	if (!gamePaused)
 	{
-		circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 10));
-		circles.getLast()->data->listener = this;
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_STATE::KEY_REPEAT)
-	{
-		if (pb_leftFlipper->body->GetAngle() - DEGTORAD * angularSpeed > -DEGTORAD * maxAngle)
+		circles.getFirst()->data->body->SetType(b2_dynamicBody);
+		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
-			pb_leftFlipper->body->SetAngularVelocity(-angularSpeed);
+			ray_on = !ray_on;
+			ray.x = App->input->GetMouseX();
+			ray.y = App->input->GetMouseY();
 		}
-
-		if (pb_leftFlipper->body->GetAngle() - DEGTORAD * angularSpeed < -DEGTORAD * maxAngle)
+		
+		/*if (App->input->GetKey(SDL_SCANCODE_1) == KEY_DOWN)
 		{
-			pb_leftFlipper->body->SetAngularVelocity(0.0f);
-		}
-	}
-	else
-	{
-		if (pb_leftFlipper->body->GetAngle() < 0.0f)
+			circles.add(App->physics->CreateCircle(App->input->GetMouseX(), App->input->GetMouseY(), 10));
+			circles.getLast()->data->listener = this;
+		}*/
+		if (App->input->GetKey(SDL_SCANCODE_LEFT) == KEY_STATE::KEY_REPEAT)
 		{
-			if (pb_leftFlipper->body->GetAngle() < DEGTORAD * minAngle + DEGTORAD * angleMargin)
+			if (pb_leftFlipper->body->GetAngle() - DEGTORAD * angularSpeed > -DEGTORAD * maxAngle)
 			{
-				pb_leftFlipper->body->SetAngularVelocity(angularSpeed);
+				pb_leftFlipper->body->SetAngularVelocity(-angularSpeed);
+			}
+
+			if (pb_leftFlipper->body->GetAngle() - DEGTORAD * angularSpeed < -DEGTORAD * maxAngle)
+			{
+				pb_leftFlipper->body->SetAngularVelocity(0.0f);
+			}
+		}
+		else
+		{
+			if (pb_leftFlipper->body->GetAngle() < 0.0f)
+			{
+				if (pb_leftFlipper->body->GetAngle() < DEGTORAD * minAngle + DEGTORAD * angleMargin)
+				{
+					pb_leftFlipper->body->SetAngularVelocity(angularSpeed);
+				}
+			}
+
+			if (pb_leftFlipper->body->GetAngle() + DEGTORAD * angularSpeed > DEGTORAD * minAngle + DEGTORAD * angleMargin)
+			{
+				pb_leftFlipper->body->SetAngularVelocity(0.0f);
 			}
 		}
 
-		if (pb_leftFlipper->body->GetAngle() + DEGTORAD * angularSpeed > DEGTORAD * minAngle + DEGTORAD * angleMargin)
+		if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_STATE::KEY_REPEAT)
 		{
-			pb_leftFlipper->body->SetAngularVelocity(0.0f);
-		}
-	}
-
-	if (App->input->GetKey(SDL_SCANCODE_RIGHT) == KEY_STATE::KEY_REPEAT)
-	{
-		if (pb_rightFlipper->body->GetAngle() + DEGTORAD * angularSpeed < DEGTORAD * maxAngle)
-		{
-			pb_rightFlipper->body->SetAngularVelocity(angularSpeed);
-		}
-
-		if (pb_rightFlipper->body->GetAngle() + DEGTORAD * angularSpeed > DEGTORAD * maxAngle)
-		{
-			pb_rightFlipper->body->SetAngularVelocity(0.0f);
-		}
-	}
-	else
-	{
-		if (pb_rightFlipper->body->GetAngle() > 0.0f)
-		{
-			if (pb_rightFlipper->body->GetAngle() > DEGTORAD * minAngle - DEGTORAD * angleMargin)
+			if (pb_rightFlipper->body->GetAngle() + DEGTORAD * angularSpeed < DEGTORAD * maxAngle)
 			{
-				pb_rightFlipper->body->SetAngularVelocity(-angularSpeed);
+				pb_rightFlipper->body->SetAngularVelocity(angularSpeed);
+			}
+
+			if (pb_rightFlipper->body->GetAngle() + DEGTORAD * angularSpeed > DEGTORAD * maxAngle)
+			{
+				pb_rightFlipper->body->SetAngularVelocity(0.0f);
 			}
 		}
-
-		if (pb_rightFlipper->body->GetAngle() - DEGTORAD * angularSpeed < DEGTORAD * minAngle - DEGTORAD * angleMargin)
+		else
 		{
-			pb_rightFlipper->body->SetAngularVelocity(0.0f);
+			if (pb_rightFlipper->body->GetAngle() > 0.0f)
+			{
+				if (pb_rightFlipper->body->GetAngle() > DEGTORAD * minAngle - DEGTORAD * angleMargin)
+				{
+					pb_rightFlipper->body->SetAngularVelocity(-angularSpeed);
+				}
+			}
+
+			if (pb_rightFlipper->body->GetAngle() - DEGTORAD * angularSpeed < DEGTORAD * minAngle - DEGTORAD * angleMargin)
+			{
+				pb_rightFlipper->body->SetAngularVelocity(0.0f);
+			}
 		}
 	}
-	
+	else if(gamePaused){
+		circles.getFirst()->data->body->SetType(b2_staticBody);
+		App->renderer->Blit(pause, 0, 0, NULL, 1.0f, 0);
+	}
 	// Prepare for raycast ------------------------------------------------------
 	
 	iPoint mouse;
@@ -151,7 +169,6 @@ update_status ModuleSceneIntro::Update()
 
 	fVector normal(0.0f, 0.0f);
 
-	App->renderer->Blit(backgroud, 0, 0, NULL, 1.0f, 0);
 	//App->renderer->Blit(leftflipper, 146, 727, NULL, 1.0f, 0);
 	// All draw functions ------------------------------------------------------
 	p2List_item<PhysBody*>* c = circles.getFirst();
@@ -163,7 +180,7 @@ update_status ModuleSceneIntro::Update()
 		App->renderer->Blit(circle, x, y, NULL, 1.0f, c->data->GetRotation());
 		c = c->next;
 	}
-	
+
 	App->renderer->Blit(leftflipper, 146, 727, NULL, 1.0f, leftflipper_b.getFirst()->data->GetRotation(), 7, 6);
 	App->renderer->Blit(rightflipper, 215, 727, NULL, 1.0f, rightflipper_b.getFirst()->data->GetRotation(), 40, 6);
 		

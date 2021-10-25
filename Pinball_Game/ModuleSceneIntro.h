@@ -23,13 +23,14 @@ public:
 	p2List<PhysBody*> leftflipper_b;
 	p2List<PhysBody*> rightflipper_b;
 	
-
+	bool gamePaused = false;
 	bool sensed;
 
 	SDL_Texture* circle;
 	SDL_Texture* backgroud;
 	SDL_Texture* leftflipper;
 	SDL_Texture* rightflipper;
+	SDL_Texture* pause;
 
 
 	PhysBody* pb_leftFlipper;

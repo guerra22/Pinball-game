@@ -12,6 +12,15 @@ public:
 	bool Start();
 	update_status Update();
 	bool CleanUp();
+	int playerLives = 3;
+	int ballsInGame = 0;
+	int score = 0;
+	void RestartPlayer()
+	{
+		score = 0;
+		playerLives = 3;
+		ballsInGame = 0;
+	}
 
 public:
 
