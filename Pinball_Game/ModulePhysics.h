@@ -50,6 +50,7 @@ public:
 	PhysBody* CreateKinematicChain(int x, int y, int* points, int size);
 
 	b2RevoluteJoint* CreateFlipperJoint(b2Body* round, b2Vec2 groundAnchor, b2Body* flipper, b2Vec2 flipperAnchor);
+
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
 	b2World* world;

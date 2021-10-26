@@ -104,7 +104,7 @@ bool ModulePhysics::Start()
 	b2PrismaticJointDef jointDef1;
 	b2Vec2 worldAxis(0.0f, -1.0f);
 	jointDef1.Initialize(b7, b6, b7->GetWorldCenter(), worldAxis);
-	jointDef1.lowerTranslation = -1.0f;
+	jointDef1.lowerTranslation = 0.1f;
 	jointDef1.upperTranslation = 1.0f;
 	jointDef1.enableLimit = true;
 	jointDef1.maxMotorForce = 30.0f;

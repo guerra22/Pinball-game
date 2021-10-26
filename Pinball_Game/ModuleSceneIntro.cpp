@@ -55,6 +55,7 @@ bool ModuleSceneIntro::Start()
 	pb_rightFlipper = App->physics->CreateKinematicChain(255, 733, rightFlipper, 20);
 	rightflipper_b.add(pb_rightFlipper);
 	circles.add(App->physics->CreateCircle(392, 732, 10));
+	circles.getLast()->data->listener = this;
 
 	angleMargin = 10.0f;
 	angularSpeed = 20.0f;
@@ -76,9 +77,7 @@ bool ModuleSceneIntro::CleanUp()
 update_status ModuleSceneIntro::Update()
 {
 	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) App->physics->joint->SetMotorSpeed(100.0f);
-	
-	
-	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) App->physics->joint->SetMotorSpeed(-100.0f);
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_UP) App->physics->joint->SetMotorSpeed(-100.0f);
 	
 
 	App->renderer->Blit(backgroud, 0, 0, NULL, 1.0f, 0);
@@ -87,9 +86,7 @@ update_status ModuleSceneIntro::Update()
 	if (App->input->GetKey(SDL_SCANCODE_R) == KEY_DOWN)
 	{
 		App->player->RestartPlayer();
-		App->physics->world->DestroyBody(circles.getFirst()->data->body);
-		circles.clear();
-		circles.add(App->physics->CreateCircle(392, 732, 10));
+		ResetBallPos();
 	}
 	if (!gamePaused)
 	{
@@ -184,9 +181,12 @@ update_status ModuleSceneIntro::Update()
 		int x, y;
 		c->data->GetPosition(x, y);
 		App->renderer->Blit(circle, x, y, NULL, 1.0f, c->data->GetRotation());
+		if (y > 780) {
+			App->player->playerLives--;
+			ResetBallPos();
+		}
 		c = c->next;
 	}
-
 	App->renderer->Blit(leftflipper, 146, 727, NULL, 1.0f, leftflipper_b.getFirst()->data->GetRotation(), 7, 6);
 	App->renderer->Blit(rightflipper, 215, 727, NULL, 1.0f, rightflipper_b.getFirst()->data->GetRotation(), 40, 6);
 		
@@ -224,4 +224,11 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 		bodyB->GetPosition(x, y);
 		App->renderer->DrawCircle(x, y, 50, 100, 100, 100);
 	}*/
+}
+
+void ModuleSceneIntro::ResetBallPos() {
+	App->physics->world->DestroyBody(circles.getFirst()->data->body);
+	//circles.clear();
+	circles.add(App->physics->CreateCircle(392, 732, 10));
+	circles.getLast()->data->listener = this;
 }
