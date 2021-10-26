@@ -63,7 +63,7 @@ bool ModulePhysics::Start()
 	body6.type = b2_dynamicBody;
 	body6.position.Set(PIXEL_TO_METERS(392), PIXEL_TO_METERS(765));
 
-	b2Body* b6 = world->CreateBody(&body6);
+	b6 = world->CreateBody(&body6);
 	b2PolygonShape box6;
 	box6.SetAsBox(PIXEL_TO_METERS(24) * 0.5f, PIXEL_TO_METERS(10) * 0.5f);
 
@@ -107,10 +107,16 @@ bool ModulePhysics::Start()
 	jointDef1.lowerTranslation = -1.0f;
 	jointDef1.upperTranslation = 1.0f;
 	jointDef1.enableLimit = true;
-	jointDef1.maxMotorForce = 10.0f;
+	jointDef1.maxMotorForce = 30.0f;
 	jointDef1.motorSpeed = 0.0f;
 	jointDef1.enableMotor = true;
-	b2PrismaticJoint* joint = (b2PrismaticJoint*)App->physics->world->CreateJoint(&jointDef1);
+	joint = (b2PrismaticJoint*)App->physics->world->CreateJoint(&jointDef1);
+
+
+	
+
+
+
 	return true;
 }
 

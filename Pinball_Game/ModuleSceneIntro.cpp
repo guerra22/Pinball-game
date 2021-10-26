@@ -75,6 +75,12 @@ bool ModuleSceneIntro::CleanUp()
 // Update: draw background
 update_status ModuleSceneIntro::Update()
 {
+	if (App->input->GetKey(SDL_SCANCODE_UP) == KEY_DOWN) App->physics->joint->SetMotorSpeed(100.0f);
+	
+	
+	if (App->input->GetKey(SDL_SCANCODE_DOWN) == KEY_DOWN) App->physics->joint->SetMotorSpeed(-100.0f);
+	
+
 	App->renderer->Blit(backgroud, 0, 0, NULL, 1.0f, 0);
 	if (App->input->GetKey(SDL_SCANCODE_P) == KEY_UP)
 		gamePaused = !gamePaused;

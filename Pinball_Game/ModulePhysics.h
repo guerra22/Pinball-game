@@ -53,13 +53,13 @@ public:
 	// b2ContactListener ---
 	void BeginContact(b2Contact* contact);
 	b2World* world;
-
+	b2PrismaticJoint* joint;
 private:
 
 	bool debug;
 
 	// Main ground
-	//b2Body* ground;
+	b2Body* b6;
 	b2Body* b7;
 
 	// Mouse joint
