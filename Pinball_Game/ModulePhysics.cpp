@@ -112,10 +112,27 @@ bool ModulePhysics::Start()
 	jointDef1.enableMotor = true;
 	joint = (b2PrismaticJoint*)App->physics->world->CreateJoint(&jointDef1);
 
+	//-----------
 
-	
+	b2BodyDef body1;
+	body1.type = b2_staticBody;
+	body1.position.Set(PIXEL_TO_METERS(493), PIXEL_TO_METERS(450));
 
+	b1 = world->CreateBody(&body1);
+	b2PolygonShape box1;
+	box1.SetAsBox(PIXEL_TO_METERS(25) * 0.5f, PIXEL_TO_METERS(10) * 0.5f);
 
+	b2FixtureDef fixture1;
+	fixture1.shape = &box1;
+	fixture1.density = 1.0f;
+
+	b1->CreateFixture(&fixture1);
+
+	PhysBody* pbodyr1 = new PhysBody();
+	pbodyr1->body = b;
+	b1->SetUserData(pbodyr1);
+	pbodyr1->width = 20 * 0.5f;
+	pbodyr1->height = 20 * 0.5f;
 
 	return true;
 }

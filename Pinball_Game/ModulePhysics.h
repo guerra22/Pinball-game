@@ -55,6 +55,8 @@ public:
 	void BeginContact(b2Contact* contact);
 	b2World* world;
 	b2PrismaticJoint* joint;
+
+	b2Body* b1;
 private:
 
 	bool debug;

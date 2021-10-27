@@ -41,6 +41,9 @@ bool ModuleSceneIntro::Start()
 	PhysBody* pb_wall7 = App->physics->CreateStaticChain(0, 0, wall7, 14);
 	PhysBody* pb_wall8 = App->physics->CreateStaticChain(0, 0, wall8, 10);
 
+	
+
+
 	walls.add(pb_wall1);
 	walls.add(pb_wall2);
 	walls.add(pb_wall3);
@@ -88,7 +91,7 @@ update_status ModuleSceneIntro::Update()
 		App->player->RestartPlayer();
 		ResetBallPos();
 	}
-	if (!gamePaused)
+	if (!gamePaused || App->player->playerLives == 0)
 	{
 		circles.getFirst()->data->body->SetType(b2_dynamicBody);
 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
@@ -175,18 +178,40 @@ update_status ModuleSceneIntro::Update()
 	//App->renderer->Blit(leftflipper, 146, 727, NULL, 1.0f, 0);
 	// All draw functions ------------------------------------------------------
 	p2List_item<PhysBody*>* c = circles.getFirst();
+	
 
-	while(c != NULL)
+
+	//App->physics->b1->SetTransform(b2Vec2(PIXEL_TO_METERS(393), PIXEL_TO_METERS(450)), App->physics->b1->GetAngle());
+	
+
+	while (c != NULL)
 	{
+
 		int x, y;
 		c->data->GetPosition(x, y);
 		App->renderer->Blit(circle, x, y, NULL, 1.0f, c->data->GetRotation());
 		if (y > 780) {
 			App->player->playerLives--;
+			App->physics->b1->SetTransform(b2Vec2(PIXEL_TO_METERS(493), PIXEL_TO_METERS(450)), App->physics->b1->GetAngle());
 			ResetBallPos();
 		}
+		
+		if (App->player->playerLives > 0)
+		{
+			int x, y;
+			c->data->GetPosition(x, y);
+
+			if (y < 400) App->physics->b1->SetTransform(b2Vec2(PIXEL_TO_METERS(393), PIXEL_TO_METERS(450)), App->physics->b1->GetAngle());
+		}
+		else App->physics->b1->SetTransform(b2Vec2(PIXEL_TO_METERS(393), PIXEL_TO_METERS(450)), App->physics->b1->GetAngle());
+
 		c = c->next;
+
+		printf("Player's lives:%i", App->player->playerLives);
 	}
+
+
+	
 	App->renderer->Blit(leftflipper, 146, 727, NULL, 1.0f, leftflipper_b.getFirst()->data->GetRotation(), 7, 6);
 	App->renderer->Blit(rightflipper, 215, 727, NULL, 1.0f, rightflipper_b.getFirst()->data->GetRotation(), 40, 6);
 		

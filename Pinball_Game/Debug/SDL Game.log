@@ -1,5 +1,5 @@
 ﻿  ModuleSceneIntro.cpp
-C:\Users\hangx\Documents\GitHub\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(196,45): warning C4244: 'argumento': conversión de 'TYPE' a 'TYPE'; posible pérdida de datos
+C:\Users\oriolvp1\Documents\GitHub\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(224,45): warning C4244: 'argumento': conversión de 'TYPE' a 'TYPE'; posible pérdida de datos
           with
           [
               TYPE=int
@@ -8,7 +8,7 @@ C:\Users\hangx\Documents\GitHub\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(1
           [
               TYPE=float
           ]
-C:\Users\hangx\Documents\GitHub\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(196,30): warning C4244: 'argumento': conversión de 'TYPE' a 'TYPE'; posible pérdida de datos
+C:\Users\oriolvp1\Documents\GitHub\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(224,30): warning C4244: 'argumento': conversión de 'TYPE' a 'TYPE'; posible pérdida de datos
           with
           [
               TYPE=int
@@ -17,37 +17,37 @@ C:\Users\hangx\Documents\GitHub\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(1
           [
               TYPE=float
           ]
-C:\Users\hangx\Documents\GitHub\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(198,18): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
-C:\Users\hangx\Documents\GitHub\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(200,70): warning C4244: 'argumento': conversión de 'TYPE' a 'int'; posible pérdida de datos
+C:\Users\oriolvp1\Documents\GitHub\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(226,18): warning C4244: 'argumento': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\oriolvp1\Documents\GitHub\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(228,70): warning C4244: 'argumento': conversión de 'TYPE' a 'int'; posible pérdida de datos
           with
           [
               TYPE=float
           ]
-C:\Users\hangx\Documents\GitHub\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(200,47): warning C4244: 'argumento': conversión de 'TYPE' a 'int'; posible pérdida de datos
+C:\Users\oriolvp1\Documents\GitHub\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(228,47): warning C4244: 'argumento': conversión de 'TYPE' a 'int'; posible pérdida de datos
           with
           [
               TYPE=float
           ]
-C:\Users\hangx\Documents\GitHub\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(203,138): warning C4244: 'argumento': conversión de 'TYPE' a 'int'; posible pérdida de datos
+C:\Users\oriolvp1\Documents\GitHub\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(231,138): warning C4244: 'argumento': conversión de 'TYPE' a 'int'; posible pérdida de datos
           with
           [
               TYPE=float
           ]
-C:\Users\hangx\Documents\GitHub\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(203,96): warning C4244: 'argumento': conversión de 'TYPE' a 'int'; posible pérdida de datos
+C:\Users\oriolvp1\Documents\GitHub\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(231,96): warning C4244: 'argumento': conversión de 'TYPE' a 'int'; posible pérdida de datos
           with
           [
               TYPE=float
           ]
-C:\Users\hangx\Documents\GitHub\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(203,57): warning C4244: 'argumento': conversión de 'TYPE' a 'int'; posible pérdida de datos
+C:\Users\oriolvp1\Documents\GitHub\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(231,57): warning C4244: 'argumento': conversión de 'TYPE' a 'int'; posible pérdida de datos
           with
           [
               TYPE=float
           ]
-C:\Users\hangx\Documents\GitHub\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(203,34): warning C4244: 'argumento': conversión de 'TYPE' a 'int'; posible pérdida de datos
+C:\Users\oriolvp1\Documents\GitHub\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(231,34): warning C4244: 'argumento': conversión de 'TYPE' a 'int'; posible pérdida de datos
           with
           [
               TYPE=float
           ]
-C:\Users\hangx\Documents\GitHub\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(211,9): warning C4101: 'y': variable local sin referencia
-C:\Users\hangx\Documents\GitHub\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(211,6): warning C4101: 'x': variable local sin referencia
-  SDL Game.vcxproj -> C:\Users\hangx\Documents\GitHub\Pinball-game\Pinball_Game\Debug\2D Physics - class 4.exe
+C:\Users\oriolvp1\Documents\GitHub\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(239,9): warning C4101: 'y': variable local sin referencia
+C:\Users\oriolvp1\Documents\GitHub\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(239,6): warning C4101: 'x': variable local sin referencia
+  SDL Game.vcxproj -> C:\Users\oriolvp1\Documents\GitHub\Pinball-game\Pinball_Game\Debug\2D Physics - class 4.exe
