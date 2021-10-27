@@ -31,8 +31,14 @@ public:
 	SDL_Texture* backgroud;
 	SDL_Texture* leftflipper;
 	SDL_Texture* rightflipper;
-	SDL_Texture* pause;
 
+	uint pause = 000;
+	int pauseFont = -1;
+	char pauseText[10] = { "\0" };
+
+	uint lives = 0000;
+	int livesFont = -1;
+	char livesText[10] = { "\0" };
 
 	PhysBody* pb_leftFlipper;
 	PhysBody* pb_rightFlipper;

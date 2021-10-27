@@ -12,6 +12,8 @@ class ModuleAudio;
 class ModulePlayer;
 class ModuleSceneIntro;
 class ModulePhysics;
+class ModuleFonts;
+class ModuleFadeToBlack;
 
 class Application
 {
@@ -24,7 +26,8 @@ public:
 	ModulePlayer* player;
 	ModuleSceneIntro* scene_intro;
 	ModulePhysics* physics;
-
+	ModuleFadeToBlack* fade;
+	ModuleFonts* fonts;
 private:
 
 	p2List<Module*> list_modules;

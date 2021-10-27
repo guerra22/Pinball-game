@@ -7,6 +7,8 @@
 #include "ModuleTextures.h"
 #include "ModuleAudio.h"
 #include "ModulePhysics.h"
+#include "ModuleFadeToBlack.h"
+#include "ModuleFonts.h"
 
 ModuleSceneIntro::ModuleSceneIntro(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
@@ -30,7 +32,11 @@ bool ModuleSceneIntro::Start()
 	backgroud = App->textures->Load("pinball/pinballtemplate.png");
 	leftflipper = App->textures->Load("pinball/leftflipper.png");
 	rightflipper = App->textures->Load("pinball/rightflipper.png");
-	pause = App->textures->Load("pinball/ctl_logo.png");
+
+	char lookupTable[] = { "! @,_./0123456789$;< ?abcdefghijklmnopqrstuvwxyz" };
+	pauseFont = App->fonts->Load("Fonts/rtype_font.png", lookupTable, 1);
+	char lookupTable1[] = { "0123456789 0123456789" };
+	livesFont = App->fonts->Load("Fonts/Score1.png", lookupTable1, 2);
 
 	PhysBody* pb_wall1 = App->physics->CreateStaticChain(0, 0, wall1, 86);
 	PhysBody* pb_wall2 = App->physics->CreateStaticChain(0, 0, wall2, 14);
@@ -90,10 +96,16 @@ update_status ModuleSceneIntro::Update()
 	{
 		App->player->RestartPlayer();
 		ResetBallPos();
+		App->physics->b1->SetTransform(b2Vec2(PIXEL_TO_METERS(493), PIXEL_TO_METERS(450)), App->physics->b1->GetAngle());
 	}
-	if (!gamePaused || App->player->playerLives == 0)
+	if (!gamePaused && App->player->playerLives != 0)
 	{
+		App->fonts->BlitText(SCREEN_WIDTH / 2 - 90, SCREEN_HEIGHT / 2 + 4, pauseFont, "player life ");
+		sprintf_s(livesText, 10, "%4d", App->player->playerLives);
+		App->fonts->BlitText(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, livesFont, livesText);
+
 		circles.getFirst()->data->body->SetType(b2_dynamicBody);
+
 		if (App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
 		{
 			ray_on = !ray_on;
@@ -164,7 +176,7 @@ update_status ModuleSceneIntro::Update()
 	}
 	else if(gamePaused){
 		circles.getFirst()->data->body->SetType(b2_staticBody);
-		App->renderer->Blit(pause, 0, 0, NULL, 1.0f, 0);
+		App->fonts->BlitText(SCREEN_WIDTH / 2 - 30, SCREEN_HEIGHT / 2 - 100, pauseFont, "pause ");
 	}
 	// Prepare for raycast ------------------------------------------------------
 	
@@ -198,16 +210,11 @@ update_status ModuleSceneIntro::Update()
 		
 		if (App->player->playerLives > 0)
 		{
-			int x, y;
-			c->data->GetPosition(x, y);
-
 			if (y < 400) App->physics->b1->SetTransform(b2Vec2(PIXEL_TO_METERS(393), PIXEL_TO_METERS(450)), App->physics->b1->GetAngle());
 		}
 		else App->physics->b1->SetTransform(b2Vec2(PIXEL_TO_METERS(393), PIXEL_TO_METERS(450)), App->physics->b1->GetAngle());
 
 		c = c->next;
-
-		printf("Player's lives:%i", App->player->playerLives);
 	}
 
 
@@ -253,7 +260,7 @@ void ModuleSceneIntro::OnCollision(PhysBody* bodyA, PhysBody* bodyB)
 
 void ModuleSceneIntro::ResetBallPos() {
 	App->physics->world->DestroyBody(circles.getFirst()->data->body);
-	//circles.clear();
+	circles.clear();
 	circles.add(App->physics->CreateCircle(392, 732, 10));
 	circles.getLast()->data->listener = this;
 }

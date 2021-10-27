@@ -13,13 +13,13 @@ public:
 	update_status Update();
 	bool CleanUp();
 	int playerLives = 3;
-	int ballsInGame = 0;
+	int ballsInGame = 1;
 	int score = 0;
 	void RestartPlayer()
 	{
 		score = 0;
 		playerLives = 3;
-		ballsInGame = 0;
+		ballsInGame = 1;
 	}
 
 public:
