@@ -47,8 +47,13 @@ bool ModuleSceneIntro::Start()
 	PhysBody* pb_wall7 = App->physics->CreateStaticChain(0, 0, wall7, 14);
 	PhysBody* pb_wall8 = App->physics->CreateStaticChain(0, 0, wall8, 10);
 
-	
-
+	PhysBody* scorehitbox1 = App->physics->CreateStaticCircle(114, 124, 24);
+	PhysBody* scorehitbox2 = App->physics->CreateStaticCircle(179, 148, 20);
+	PhysBody* scorehitbox3 = App->physics->CreateStaticCircle(243, 148, 20);
+	PhysBody* scorehitbox4 = App->physics->CreateStaticCircle(305, 148, 20);
+	PhysBody* scorehitbox5 = App->physics->CreateStaticCircle(214, 269, 21);
+	PhysBody* scorehitbox6 = App->physics->CreateStaticCircle(158, 346, 21);
+	PhysBody* scorehitbox7 = App->physics->CreateStaticCircle(275, 347, 21);
 
 	walls.add(pb_wall1);
 	walls.add(pb_wall2);

@@ -23,6 +23,7 @@ public:
 	p2List<PhysBody*> walls;
 	p2List<PhysBody*> leftflipper_b;
 	p2List<PhysBody*> rightflipper_b;
+	p2List<PhysBody*> scorehitbox;
 	
 	bool gamePaused = false;
 	bool sensed;
