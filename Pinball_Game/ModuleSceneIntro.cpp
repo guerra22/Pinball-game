@@ -55,6 +55,14 @@ bool ModuleSceneIntro::Start()
 	PhysBody* scorehitbox6 = App->physics->CreateStaticCircle(158, 346, 21);
 	PhysBody* scorehitbox7 = App->physics->CreateStaticCircle(275, 347, 21);
 
+	scorehitbox.add(scorehitbox1);
+	scorehitbox.add(scorehitbox2);
+	scorehitbox.add(scorehitbox3);
+	scorehitbox.add(scorehitbox4);
+	scorehitbox.add(scorehitbox5);
+	scorehitbox.add(scorehitbox6);
+	scorehitbox.add(scorehitbox7);
+
 	walls.add(pb_wall1);
 	walls.add(pb_wall2);
 	walls.add(pb_wall3);
@@ -106,8 +114,12 @@ update_status ModuleSceneIntro::Update()
 	if (!gamePaused && App->player->playerLives != 0)
 	{
 		App->fonts->BlitText(SCREEN_WIDTH / 2 - 90, SCREEN_HEIGHT / 2 + 4, pauseFont, "player life ");
-		sprintf_s(livesText, 10, "%4d", App->player->playerLives);
-		App->fonts->BlitText(SCREEN_WIDTH/2, SCREEN_HEIGHT/2, livesFont, livesText);
+		sprintf_s(livesText, 10, "%d", App->player->playerLives);
+		App->fonts->BlitText(SCREEN_WIDTH / 2 + 8, SCREEN_HEIGHT / 2, livesFont, livesText);
+		
+		App->fonts->BlitText(SCREEN_WIDTH / 2 - 90, SCREEN_HEIGHT / 2 + 16, pauseFont, "player score ");
+		sprintf_s(livesText, 10, "%5d", App->player->score);
+		App->fonts->BlitText(SCREEN_WIDTH / 2 + 8, SCREEN_HEIGHT / 2 + 12, livesFont, livesText);
 
 		circles.getFirst()->data->body->SetType(b2_dynamicBody);
 
@@ -181,7 +193,7 @@ update_status ModuleSceneIntro::Update()
 	}
 	else if(gamePaused){
 		circles.getFirst()->data->body->SetType(b2_staticBody);
-		App->fonts->BlitText(SCREEN_WIDTH / 2 - 30, SCREEN_HEIGHT / 2 - 100, pauseFont, "pause ");
+		App->fonts->BlitText(SCREEN_WIDTH / 2 - 30, SCREEN_HEIGHT / 2, pauseFont, "pause ");
 	}
 	// Prepare for raycast ------------------------------------------------------
 	
@@ -196,8 +208,6 @@ update_status ModuleSceneIntro::Update()
 	// All draw functions ------------------------------------------------------
 	p2List_item<PhysBody*>* c = circles.getFirst();
 	
-
-
 	//App->physics->b1->SetTransform(b2Vec2(PIXEL_TO_METERS(393), PIXEL_TO_METERS(450)), App->physics->b1->GetAngle());
 	
 

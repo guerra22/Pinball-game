@@ -1,5 +1,5 @@
 ﻿  ModuleSceneIntro.cpp
-D:\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(233,45): warning C4244: 'argument': conversion from 'TYPE' to 'TYPE', possible loss of data
+D:\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(243,45): warning C4244: 'argument': conversion from 'TYPE' to 'TYPE', possible loss of data
           with
           [
               TYPE=int
@@ -8,7 +8,7 @@ D:\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(233,45): warning C4244: 'argum
           [
               TYPE=float
           ]
-D:\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(233,30): warning C4244: 'argument': conversion from 'TYPE' to 'TYPE', possible loss of data
+D:\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(243,30): warning C4244: 'argument': conversion from 'TYPE' to 'TYPE', possible loss of data
           with
           [
               TYPE=int
@@ -17,37 +17,37 @@ D:\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(233,30): warning C4244: 'argum
           [
               TYPE=float
           ]
-D:\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(235,18): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
-D:\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(237,70): warning C4244: 'argument': conversion from 'TYPE' to 'int', possible loss of data
+D:\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(245,18): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+D:\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(247,70): warning C4244: 'argument': conversion from 'TYPE' to 'int', possible loss of data
           with
           [
               TYPE=float
           ]
-D:\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(237,47): warning C4244: 'argument': conversion from 'TYPE' to 'int', possible loss of data
+D:\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(247,47): warning C4244: 'argument': conversion from 'TYPE' to 'int', possible loss of data
           with
           [
               TYPE=float
           ]
-D:\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(240,138): warning C4244: 'argument': conversion from 'TYPE' to 'int', possible loss of data
+D:\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(250,138): warning C4244: 'argument': conversion from 'TYPE' to 'int', possible loss of data
           with
           [
               TYPE=float
           ]
-D:\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(240,96): warning C4244: 'argument': conversion from 'TYPE' to 'int', possible loss of data
+D:\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(250,96): warning C4244: 'argument': conversion from 'TYPE' to 'int', possible loss of data
           with
           [
               TYPE=float
           ]
-D:\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(240,57): warning C4244: 'argument': conversion from 'TYPE' to 'int', possible loss of data
+D:\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(250,57): warning C4244: 'argument': conversion from 'TYPE' to 'int', possible loss of data
           with
           [
               TYPE=float
           ]
-D:\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(240,34): warning C4244: 'argument': conversion from 'TYPE' to 'int', possible loss of data
+D:\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(250,34): warning C4244: 'argument': conversion from 'TYPE' to 'int', possible loss of data
           with
           [
               TYPE=float
           ]
-D:\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(248,9): warning C4101: 'y': unreferenced local variable
-D:\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(248,6): warning C4101: 'x': unreferenced local variable
+D:\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(258,9): warning C4101: 'y': unreferenced local variable
+D:\Pinball-game\Pinball_Game\ModuleSceneIntro.cpp(258,6): warning C4101: 'x': unreferenced local variable
   SDL Game.vcxproj -> D:\Pinball-game\Pinball_Game\Debug\2D Physics - class 4.exe
