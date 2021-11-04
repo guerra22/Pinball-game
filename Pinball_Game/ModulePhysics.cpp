@@ -119,11 +119,12 @@ bool ModulePhysics::Start()
 	body1.position.Set(PIXEL_TO_METERS(493), PIXEL_TO_METERS(450));
 
 	b1 = world->CreateBody(&body1);
-	b2PolygonShape box1;
-	box1.SetAsBox(PIXEL_TO_METERS(25) * 0.5f, PIXEL_TO_METERS(10) * 0.5f);
+
+	b2CircleShape shape1;
+	shape1.m_radius = PIXEL_TO_METERS(40);
 
 	b2FixtureDef fixture1;
-	fixture1.shape = &box1;
+	fixture1.shape = &shape1;
 	fixture1.density = 1.0f;
 
 	b1->CreateFixture(&fixture1);
@@ -133,6 +134,9 @@ bool ModulePhysics::Start()
 	b1->SetUserData(pbodyr1);
 	pbodyr1->width = 20 * 0.5f;
 	pbodyr1->height = 20 * 0.5f;
+
+	//----------
+
 
 	return true;
 }

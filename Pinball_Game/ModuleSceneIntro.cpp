@@ -210,7 +210,7 @@ update_status ModuleSceneIntro::Update()
 		
 		if (App->player->playerLives > 0)
 		{
-			if (y < 400) App->physics->b1->SetTransform(b2Vec2(PIXEL_TO_METERS(393), PIXEL_TO_METERS(450)), App->physics->b1->GetAngle());
+			if (y < 400) App->physics->b1->SetTransform(b2Vec2(PIXEL_TO_METERS(420), PIXEL_TO_METERS(450)), App->physics->b1->GetAngle());
 		}
 		else App->physics->b1->SetTransform(b2Vec2(PIXEL_TO_METERS(393), PIXEL_TO_METERS(450)), App->physics->b1->GetAngle());
 
