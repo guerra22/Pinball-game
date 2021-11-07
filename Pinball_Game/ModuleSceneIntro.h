@@ -6,6 +6,13 @@
 
 class PhysBody;
 
+struct bumper_def
+{
+	int x;
+	int y;
+	int radius;
+};
+
 class ModuleSceneIntro : public Module
 {
 public:
@@ -18,12 +25,40 @@ public:
 	void OnCollision(PhysBody* bodyA, PhysBody* bodyB);
 	void ResetBallPos();
 
+	int GetCenterX(SDL_Rect r)
+	{
+		return  r.x + r.w / 2;
+	}
+	int GetCenterY(SDL_Rect r)
+	{
+		return  r.y + r.h / 2;
+	}
 public:
+	bumper_def bumper01;
+	bumper_def bumper02;
+	bumper_def bumper03;
+	bumper_def bumper04;
+	PhysBody* pb_bumper01;
+	PhysBody* pb_bumper02;
+	PhysBody* pb_bumper03;
+	PhysBody* pb_bumper04;
+	PhysBody* pb_rightLateralBumper;
+	PhysBody* pb_leftLateralBumper;
+    PhysBody* ballLauncherRectangle;
+
+	float ballLauncherRecInitPosX;
+	float ballLauncherRecInitPosY;
+	float lateralBumperForce;
+	float bumperForce;
+	float bigbumperForce;
+
 	p2List<PhysBody*> circles;
 	p2List<PhysBody*> walls;
 	p2List<PhysBody*> leftflipper_b;
 	p2List<PhysBody*> rightflipper_b;
-	p2List<PhysBody*> scorehitbox;
+	p2List<PhysBody*> hitbox;
+	p2List<PhysBody*> bumpers;
+	p2List<PhysBody*> bigbumper;
 	
 	bool gamePaused = false;
 	bool sensed;
@@ -32,6 +67,11 @@ public:
 	SDL_Texture* backgroud;
 	SDL_Texture* leftflipper;
 	SDL_Texture* rightflipper;
+	SDL_Texture* spring;
+	SDL_Texture* pausescreen;
+	SDL_Texture* startscreen;
+	SDL_Texture* endscreen;
+
 
 	uint pause = 000;
 	int pauseFont = -1;
@@ -49,7 +89,17 @@ public:
 	float minAngle;
 	float angleMargin;
 
+	bool play = true;
+	bool end = false;
+
 	uint bonus_fx;
+	uint start_fx;
+	uint collide_fx;
+	uint lose_fx;
+	uint bg_music;
+
+	bool fx_on = true;
+
 	p2Point<int> ray;
 	bool ray_on;
 
@@ -179,6 +229,23 @@ public:
 	119, 521
 	};
 
+	int rightRedIsland[12] = {
+	772, 1570,
+	798, 1593,
+	896, 1556,
+	903, 1340,
+	869, 1363,
+	784, 1553
+	};
+	int leftRedIsland[12] = {
+	300, 1570,
+	208, 1368,
+	180, 1340,
+	172, 1556,
+	273, 1597,
+	301, 1578
+	};
+
 	int leftFlipper[20] = {
 	-6, -4,
 	-2, -7,
@@ -203,4 +270,18 @@ public:
 	0, 7,
 	6, 2
 	};
+	int ballStartPositionerLeft[6]
+	{
+		378, 746,
+		378, 755,
+		383, 755
+	};
+
+	int ballStartPositionerRight[6]
+	{
+		407, 746,
+		407, 755,
+		402, 755
+	};
+	float startForce;
 };

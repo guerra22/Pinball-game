@@ -14,6 +14,8 @@ public:
 	bool CleanUp();
 	int playerLives = 3;
 	int ballsInGame = 1;
+	int lastscore = 0;
+	int highestscore = 0;
 	int score = 0;
 	void RestartPlayer()
 	{

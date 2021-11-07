@@ -15,7 +15,7 @@
 ModulePhysics::ModulePhysics(Application* app, bool start_enabled) : Module(app, start_enabled)
 {
 	world = NULL;
-	debug = true;
+	debug = false;
 }
 
 // Destructor
@@ -59,7 +59,7 @@ bool ModulePhysics::Start()
 
 	delete p;
 
-	b2BodyDef body6;
+	/*b2BodyDef body6;
 	body6.type = b2_dynamicBody;
 	body6.position.Set(PIXEL_TO_METERS(392), PIXEL_TO_METERS(765));
 
@@ -77,7 +77,7 @@ bool ModulePhysics::Start()
 	pbody6->body = b6;
 	b6->SetUserData(pbody6);
 	pbody6->width = 300;
-	pbody6->height = 780;
+	pbody6->height = 780;*/
 	//------------------------------------------------
 	b2BodyDef body7;
 	body7.type = b2_staticBody;
@@ -101,7 +101,7 @@ bool ModulePhysics::Start()
 
 //----------------------
 
-	b2PrismaticJointDef jointDef1;
+	/*b2PrismaticJointDef jointDef1;
 	b2Vec2 worldAxis(0.0f, -1.0f);
 	jointDef1.Initialize(b7, b6, b7->GetWorldCenter(), worldAxis);
 	jointDef1.lowerTranslation = 0.1f;
@@ -110,7 +110,7 @@ bool ModulePhysics::Start()
 	jointDef1.maxMotorForce = 30.0f;
 	jointDef1.motorSpeed = 0.0f;
 	jointDef1.enableMotor = true;
-	joint = (b2PrismaticJoint*)App->physics->world->CreateJoint(&jointDef1);
+	joint = (b2PrismaticJoint*)App->physics->world->CreateJoint(&jointDef1);*/
 
 	//-----------
 
@@ -184,6 +184,31 @@ PhysBody* ModulePhysics::CreateCircle(int x, int y, int radius)
 	return pbody;
 }
 
+PhysBody* ModulePhysics::CreateSensorCircle(int x, int y, int radius)
+{
+	b2BodyDef body;
+	body.type = b2_staticBody;
+	body.position.Set(PIXEL_TO_METERS(x), PIXEL_TO_METERS(y));
+
+	b2Body* b = world->CreateBody(&body);
+
+	b2CircleShape shape;
+	shape.m_radius = PIXEL_TO_METERS(radius);
+	b2FixtureDef fixture;
+	fixture.shape = &shape;
+	fixture.density = 5.0f;
+	fixture.isSensor = true;
+
+	b->CreateFixture(&fixture);
+
+	// TODO 4: add a pointer to PhysBody as UserData to the body
+	PhysBody* pbody = new PhysBody();
+	pbody->body = b;
+	pbody->width = pbody->height = radius;
+
+	return pbody;
+}
+
 PhysBody* ModulePhysics::CreateStaticCircle(int x, int y, int radius)
 {
 	b2BodyDef body;
@@ -231,6 +256,30 @@ PhysBody* ModulePhysics::CreateRectangle(int x, int y, int width, int height)
 	pbodyr->height = height * 0.5f;
 
 	return pbodyr;
+}
+
+PhysBody* ModulePhysics::CreateKinematicRectangle(int x, int y, int width, int height)
+{
+	b2BodyDef body;
+	body.type = b2_kinematicBody;
+	body.position.Set(PIXEL_TO_METERS(x) * SCREEN_SIZE, PIXEL_TO_METERS(y) * SCREEN_SIZE);
+
+	b2Body* b = world->CreateBody(&body);
+	b2PolygonShape box;
+	box.SetAsBox(PIXEL_TO_METERS(width) * 0.5f * SCREEN_SIZE, PIXEL_TO_METERS(height) * 0.5f * SCREEN_SIZE);
+
+	b2FixtureDef fixture;
+	fixture.shape = &box;
+	fixture.density = 1.0f;
+
+	b->CreateFixture(&fixture);
+
+	PhysBody* pbody = new PhysBody();
+	pbody->body = b;
+	pbody->width = width * 0.5f * SCREEN_SIZE;
+	pbody->height = height * 0.5f * SCREEN_SIZE;
+
+	return pbody;
 }
 
 PhysBody* ModulePhysics::CreateRectangleSensor(int x, int y, int width, int height)
