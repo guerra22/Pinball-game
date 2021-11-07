@@ -1,29 +1,29 @@
-# {Project Name}
+# {HangXue_OriolVia_Pinball}
 
 ## Description
 
-{project description}
+We are two students from CITM, this is our physical pinball game.
 
 ## Key Features
 
- - {Feature01}
- - {Feature02}
- - {Feature03}
- - {Feature04}
- 
+ - {F1 - see colliders}
+
 ## Controls
 
- - {ControlsScheme}
+ - {SPACE - start game}
+ - {Left arrow - move left flipper}
+ - {Right arrow - move right flipper}
+ - {Down arrow - launch the ball}
+ - {R - restart game}
 
 ## Developers
 
- - {Dev01} - {Role(s)}
- - {Dev02} - {Role(s)}
- - {Dev03} - {Role(s)}
- - {Dev04} - {Role(s)}
+ - {Hang Xue} - {Programmer}
+ - {Oriol Via Porcar} - {Programmer}
 
 ## License
 
 This project is licensed under an unmodified MIT license, which is an OSI-certified license that allows static linking with closed source software. Check [LICENSE](LICENSE) for further details.
 
 {AdditionalLicenses}
+
